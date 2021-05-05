@@ -21,5 +21,6 @@
 </div>
 <br class="clearfix" />
 <!-- Footer -->
+<?php include "footer.php"; ?>
 </body>
 </html>
