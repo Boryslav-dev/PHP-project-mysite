@@ -2,7 +2,7 @@
 
 namespace Framework\Core;
 
-class ActiveRecord
+abstract class ActiveRecord
 {
     /** @var int */
     protected $id;
