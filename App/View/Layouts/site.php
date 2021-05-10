@@ -15,7 +15,7 @@
 <div id="content">
   <div class="box">
     <!-- Content -->
-      <?php include 'views/' . $template; ?>
+      <?php include 'App/View/Templates/' . $template; ?>
   </div>
   <br class="clearfix" />
 </div>
