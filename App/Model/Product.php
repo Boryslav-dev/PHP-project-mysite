@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Model;
+
+use Framework\Core\Model;
+
+class Product extends Model
+{
+    protected $id;
+
+    protected $name;
+
+    protected $category;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    public function getAllProduct(): array
+    {
+        return $this->file;
+    }
+
+    protected static function getTableName(): string
+    {
+        return "Product";
+    }
+
+}
