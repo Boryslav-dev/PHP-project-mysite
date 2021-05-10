@@ -26,4 +26,5 @@ abstract class ActiveRecord
         return lcfirst(str_replace('_', '', ucwords($source, '_')));
     }
 
+    abstract protected static function getTableName(): string;
 }
