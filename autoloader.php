@@ -1,7 +1,5 @@
 <?php
 
-namespace Framework\Core\Autoloader;
-
 class Autoloader
 {
     public function __construct(array $rules = [])
@@ -10,13 +8,8 @@ class Autoloader
     }
 
     public function load($classname){
-
         $part = explode('\\', $classname);
-
-        $path = __DIR__ . '/../Framework/' . implode('/', $part) . '.php';
-
-        print_r($path);
-
+        $path = __DIR__ . '/' . implode('/', $part) . '.php';
         if (file_exists($path)){
             require_once $path;
             return true;
@@ -26,3 +19,4 @@ class Autoloader
 }
 
 ?>
+
