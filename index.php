@@ -10,6 +10,5 @@ spl_autoload_register([$autoloader, 'load']);
 $app = new Application();
 
 $app->router->get('/', [\App\Controller\ProductController::class, 'getProductList']);
-$app->router->get('/contact', [\App\Controller\ProductController::class, 'getProductList']);
 
 $app->run();
