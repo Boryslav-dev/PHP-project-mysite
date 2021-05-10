@@ -11,10 +11,8 @@ var_dump($_SERVER);
 
 $app = new Application();
 
-$app->router->get('/', 'home');
-$app->router->get('/public/index.php/contact', function(){
-    return 'Contact';
-});
+$app->router->get('/', [\App\Controller\ProductController::class, 'getProductList']);
 
 $app->run();
+
 ?>
