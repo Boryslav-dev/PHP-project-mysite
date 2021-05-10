@@ -1,25 +1,20 @@
 <?php
-include 'autoloader.php';
+
+use Framework\Application;
+use Framework\Router\Router;
+
+include_once __DIR__ . '/../autoloader.php';
 $autoloader = new Autoloader();
 spl_autoload_register([$autoloader, 'load']);
 
-$layout = 'site.php';
-$template = 'product_list.php';
+var_dump($_SERVER);
 
-$productsDecode = json_decode(file_get_contents('App/Storage/products.txt'), true);
+$app = new Application();
 
-function render(string $template, array $params = null, string $layout)
-{
-    if (is_array($params)) {
-        // converting array elements to variables
-        extract($params);
-    }
-    /*
-    dynamically connecting a common template (view),
-    inside which the view will be embedded
-    to display the content of a specific page.
-    */
-    include 'views/layouts/' . $layout;
-}
+$app->router->get('/', 'home');
+$app->router->get('/public/index.php/contact', function(){
+    return 'Contact';
+});
 
+$app->run();
 ?>

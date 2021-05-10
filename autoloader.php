@@ -1,8 +1,9 @@
 <?php
 
+namespace Framework\Core\Autoloader;
+
 class Autoloader
 {
-
     public function __construct(array $rules = [])
     {
 
@@ -11,9 +12,10 @@ class Autoloader
     public function load($classname){
 
         $part = explode('\\', $classname);
-        $part = array_splice($part, 1, count($part));
 
-        $path = __DIR__ . "/App/" . implode('/', $part) . '.php';
+        $path = __DIR__ . '/../Framework/' . implode('/', $part) . '.php';
+
+        print_r($path);
 
         if (file_exists($path)){
             require_once $path;
