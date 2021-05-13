@@ -16,9 +16,11 @@ class ProductController extends Controller
         return($this->view->render('product_list.php', $params, 'site.php'));
     }
 
-    public function login()
+    public function getProductById($id)
     {
-        $this->setLayout('auth');
-        return $this->render('login');
+        $this->productController = new Product();
+        $params = $this->productController->getOneProduct($id);
+        return$this->view->render('product_one.php', $params, 'site.php');
     }
+
 }

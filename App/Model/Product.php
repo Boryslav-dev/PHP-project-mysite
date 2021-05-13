@@ -27,6 +27,20 @@ class Product extends Model
         return $this->file;
     }
 
+    public function getOneProduct($id): array
+    {
+
+        $products = $this->file;
+
+        if ($id !== $products[$id]['id']) {
+            echo ($id);
+        }
+        else {
+            $data = ($products[$id]);
+        }
+        return $data;
+    }
+
     protected static function getTableName(): string
     {
         return "Product";
