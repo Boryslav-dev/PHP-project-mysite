@@ -14,4 +14,5 @@ class Model extends ActiveRecord
     {
         // TODO: Implement getTableName() method.
     }
+
 }
