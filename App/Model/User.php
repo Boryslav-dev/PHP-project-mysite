@@ -8,7 +8,7 @@ class User extends Model
 {
     protected $id;
 
-    protected $name;
+    protected string $name;
 
     protected $password;
 

@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $id;
 
-    protected $name;
+    protected string $name;
 
     public function getName(): string
     {
@@ -17,7 +17,6 @@ class Category extends Model
 
     protected static function getTableName(): string
     {
-       return "Category";
+        return "Category";
     }
-
 }

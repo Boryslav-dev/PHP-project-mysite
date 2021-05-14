@@ -8,9 +8,9 @@ class Product extends Model
 {
     protected $id;
 
-    protected $name;
+    protected string $name;
 
-    protected $category;
+    protected string $category;
 
     public function getName(): string
     {
@@ -29,13 +29,11 @@ class Product extends Model
 
     public function getOneProduct($id): array
     {
-
         $products = $this->file;
 
         if ($id !== $products[$id]['id']) {
-            echo ($id);
-        }
-        else {
+            echo($id);
+        } else {
             $data = ($products[$id]);
         }
         return $data;
@@ -45,5 +43,4 @@ class Product extends Model
     {
         return "Product";
     }
-
 }

@@ -6,10 +6,10 @@ use Framework\Session\Session;
 
 class Auth
 {
-
     protected Session $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
@@ -25,26 +25,28 @@ class Auth
         }
     }
 
-    public function auth($login, $pass): bool {
-
+    public function auth($login, $pass): bool
+    {
         $LOGIN = 'User';
         $PASSWORD = '1234567890';
 
-        if( $login == $LOGIN && $pass == $PASSWORD) {
+        if ($login == $LOGIN && $pass == $PASSWORD) {
             session_start();
             $_SESSION['login'] = $login;
 
             return true;
+        } else {
+            return false;
         }
-        else return false;
     }
 
-    public function getLogin(): string {
+    public function getLogin(): string
+    {
         return $_SESSION['login'];
     }
 
-    public function logOut(): void {
+    public function logOut(): void
+    {
         $this->session->destroy();
     }
-
 }

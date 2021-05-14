@@ -6,7 +6,8 @@ class Model extends ActiveRecord
 {
     protected $file;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->file = json_decode(file_get_contents('App/Storage/products.txt'), true);
     }
 
@@ -14,5 +15,4 @@ class Model extends ActiveRecord
     {
         // TODO: Implement getTableName() method.
     }
-
 }
