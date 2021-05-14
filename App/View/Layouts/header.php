@@ -15,14 +15,14 @@
              ?>
             <?php if(!isset($_SESSION['login'])): ?>
             <div class="text-end">
-                <a href="/login" class="btn btn-outline-light me-2">Login</a>
+                <a href="/login/" class="btn btn-outline-light me-2">Login</a>
                 <button type="button" class="btn btn-warning">Sign-up</button>
             </div>
             <?php else:
                 echo $_SESSION['login'];
             ?>
             <div class="text-end ms-5">
-                <a href="/logout" class="btn btn-outline-light me-2">LogOut</a>
+                <a href="/logout/" class="btn btn-outline-light me-2">LogOut</a>
             </div>
             <?php endif; ?>
         </div>
