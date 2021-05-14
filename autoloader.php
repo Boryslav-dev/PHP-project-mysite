@@ -7,10 +7,11 @@ class Autoloader
 
     }
 
-    public function load($classname){
+    public function load($classname): bool
+    {
         $part = explode('\\', $classname);
         $path = __DIR__ . '/' . implode('/', $part) . '.php';
-        if (file_exists($path)){
+        if (file_exists($path)) {
             require_once $path;
             return true;
         }
