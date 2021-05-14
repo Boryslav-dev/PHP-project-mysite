@@ -1,0 +1,20 @@
+{
+    "name": "boryslav/mysite",
+    "authors": [
+        {
+            "name": "Boryslav",
+            "email": "kuchkovborislav000@gmail.com"
+        }
+    ],
+    "require": {
+        "squizlabs/php_codesniffer": "^3.6",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Framework\\": "Framework/"
+        }
+    }
+}
