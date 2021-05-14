@@ -10,10 +10,14 @@ class LoginController extends Controller
 
     protected Auth $auth;
 
+    public function authorization() {
+        return $this->view->render('Authorization/login.php', null, 'site.php');
+    }
+
     public function login() {
         $auth = new Auth();
-        $message = $auth->isAuth();
-        return $this->view->render('Authorization/login.php', $message, 'site.php');
+        $auth->isAuth();
+        return header('Location:/');
     }
 
     public function logout(){

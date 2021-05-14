@@ -11,7 +11,7 @@ $app = new Application();
 
 $app->router->get('/', [\App\Controller\ProductController::class, 'getProductList']);
 $app->router->get('/product/{id}', [\App\Controller\ProductController::class, 'getProductById']);
-$app->router->get('/login', [\App\Controller\LoginController::class, 'login']);
+$app->router->get('/login', [\App\Controller\LoginController::class, 'authorization']);
 $app->router->get('/logout', [\App\Controller\LoginController::class, 'logout']);
 $app->router->post('/login', [\App\Controller\LoginController::class, 'login']);
 

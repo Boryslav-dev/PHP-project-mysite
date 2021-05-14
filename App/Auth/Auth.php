@@ -2,9 +2,19 @@
 
 namespace App\Auth;
 
+use Framework\Session\Session;
+
 class Auth
 {
-    public function isAuth() {
+
+    protected Session $session;
+
+    public function __construct() {
+        $this->session = new Session();
+    }
+
+    public function isAuth(): bool
+    {
         if (isset($_POST['submit'])) {
             if (isset($_POST['login']) && isset($_POST['password'])) {
                 $login = $_POST['login'];
@@ -15,25 +25,26 @@ class Auth
         }
     }
 
-    public function auth($login, $pass) {
+    public function auth($login, $pass): bool {
+
         $LOGIN = 'User';
         $PASSWORD = '1234567890';
 
         if( $login == $LOGIN && $pass == $PASSWORD) {
             session_start();
             $_SESSION['login'] = $login;
-            return header('Location:/');
+
+            return true;
         }
-        else return $message = "Не правильный логин или пароль";
+        else return false;
     }
 
-    public function getLogin() {
-        return $_SESSION['login']();
+    public function getLogin(): string {
+        return $_SESSION['login'];
     }
 
-    public function logOut() {
-        session_start();
-        session_destroy();
+    public function logOut(): void {
+        $this->session->destroy();
     }
 
 }
