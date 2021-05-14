@@ -33,10 +33,10 @@ class Router
         $callback = $this->routeMap[$method][$url] ?? false;
         print_r($callback);
         if (is_array($callback)) {
-            $controller = new $callback[0];
+            $controller = new $callback[0]();
             $callback[0] = $controller;
             $action = $callback[1];
         }
-        return call_user_func($callback, $matches[2]);
+        return call_user_func($callback);
     }
 }
