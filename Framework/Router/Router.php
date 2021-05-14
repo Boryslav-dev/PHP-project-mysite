@@ -16,28 +16,27 @@ class Router
 
     public function get(string $url, $callback)
     {
-        $this->routeMap['get'][$url] = $callback;
+        $url = '/^' . str_replace('/', '\/', $url) . '$/';
+        $this->routeMap[$url] = $callback;
     }
 
     public function post(string $url, $callback)
     {
-        $this->routeMap['post'][$url] = $callback;
+        $url = '/^' . str_replace('/', '\/', $url) . '$/';
+        $this->routeMap[$url] = $callback;
     }
 
     public function resolve()
     {
         $method = $this->request->getMethod();
         $url = $this->request->getUrl();
-        preg_match('/^\/(.+)\/(.+)$/', $url, $matches);
-        print_r($matches);
-        $callback = $this->routeMap[$method][$url] ?? false;
-        print_r($callback);
-        if (is_array($callback)) {
-            $controller = new $callback[0]();
-            $callback[0] = $controller;
-            $action = $callback[1];
+        foreach ($this->routeMap as $pattern => $callback) {
+            if (preg_match($pattern, $url, $params)) {
+                $controller = new $callback[0]();
+                $callback[0] = $controller;
+                array_shift($params);
+                return call_user_func($callback, $params[0]);
+            }
         }
-
-        return call_user_func($callback, $matches[2]);
     }
 }
