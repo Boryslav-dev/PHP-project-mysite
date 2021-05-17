@@ -9,11 +9,11 @@
                 <li><a href="/" class="nav-link px-2 text-white">Product List</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Bucket</a></li>
             </ul>
-            <?php $sessionName = session_name();
-                if (isset($_COOKIE[$sessionName]) || isset($_REQUEST[$sessionName]))
-                session_start();
-             ?>
-            <?php if(!isset($_SESSION['login'])): ?>
+            <?php $session = new Framework\Session\Session();
+            if ($session->cookieExists()) {
+                $session->start();
+            }
+            if (!isset($_SESSION['login'])): ?>
             <div class="text-end">
                 <a href="/login/" class="btn btn-outline-light me-2">Login</a>
                 <button type="button" class="btn btn-warning">Sign-up</button>
