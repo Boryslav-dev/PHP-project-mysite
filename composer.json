@@ -1,14 +1,17 @@
 {
     "name": "boryslav/mysite",
+    "license": "MIT",
     "authors": [
         {
             "name": "Boryslav",
             "email": "kuchkovborislav000@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "squizlabs/php_codesniffer": "^3.6",
-        "friendsofphp/php-cs-fixer": "^3.0"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "kuchkov/telegram-monolog": "dev-master"
     },
     "description": "",
     "autoload": {
