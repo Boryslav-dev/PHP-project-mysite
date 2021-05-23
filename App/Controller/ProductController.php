@@ -13,6 +13,7 @@ class ProductController extends Controller
     {
         $this->productController = new Product();
         $params = $this->productController->getAllProduct();
+        $this->log->info('Yes man');
         return($this->view->render('product_list.php', $params, 'site.php'));
     }
 
