@@ -1,10 +1,10 @@
 <?php
 
+use Framework\Application;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-
-use Framework\Application;
 
 include_once 'vendor/autoload.php';
 
