@@ -14,6 +14,6 @@ $app->router->get('/', [\App\Controller\ProductController::class, 'getProductLis
 $app->router->get('/product/(\d+)', [\App\Controller\ProductController::class, 'getProductById']);
 $app->router->get('/logout/', [\App\Controller\LoginController::class, 'logout']);
 $app->router->post('/login/send/', [\App\Controller\LoginController::class, 'login']);
-$app->router->get('/login/', [\App\Controller\LoginController::class, 'authorization']);
+$app->router->get('/login/', [\App\Controller\LoginController::class, 'register']);
 
 $app->run();
