@@ -39,14 +39,14 @@ abstract class ActiveRecord
         $tableName = static::getTableName();
         $attributes = $this->attributes();
         $params = array_map(fn ($attr) => "?", $attributes);
-        if ($this->recordExists($tableName, $params) == true) {
+        if ($this->recordExists($tableName) == true) {
             $this->update($tableName, $attributes, $params);
         } else {
             $this->insert($tableName, $attributes, $params);
         }
     }
 
-    public function recordExists($tableName, $params): bool
+    public function recordExists($tableName): bool
     {
         $statement = Application::$app->db->query("SELECT COUNT(1) FROM $tableName WHERE 'id'= $this->id");
         if ($statement == false) {
@@ -63,9 +63,7 @@ abstract class ActiveRecord
         foreach ($attributes as $attribute) {
             array_push($array, $this->{$attribute});
         }
-        var_dump($array);
         $statement->execute($array);
-        var_dump($statement);
         return true;
     }
 
@@ -84,11 +82,8 @@ abstract class ActiveRecord
         $array = [];
         foreach ($attributes as $attribute) {
             array_push($array, $this->{$attribute});
-//            $statement->bindValue(":$attribute", $this->{$attribute});
         }
-        var_dump($array);
         $statement->execute($array);
-        var_dump($statement);
         return true;
     }
 
@@ -123,6 +118,6 @@ abstract class ActiveRecord
     public static function delete($where)
     {
         $tableName = static::getTableName();
-        Application::$app->db->query("DELETE FROM $tableName WHERE 'id' = $where");
+        Application::$app->db->query("DELETE FROM $tableName WHERE id = $where");
     }
 }
