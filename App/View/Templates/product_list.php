@@ -10,7 +10,7 @@
               <p class="card-text">
                 <p><?= $item['price']; ?></p>
               </p>
-              <$params adiv class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a class="btn btn-small" href="/product/<?= $item['id']; ?>">More</a>
                 </div>
