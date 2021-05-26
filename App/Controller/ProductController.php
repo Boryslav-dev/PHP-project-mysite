@@ -7,20 +7,20 @@ use Framework\Core\Controller;
 
 class ProductController extends Controller
 {
-    protected $productController;
+    protected $product;
 
     public function getProductList()
     {
-        $this->productController = new Product();
-        $params = $this->productController->getAllProduct();
-        return($this->view->render('product_list.php', $params, 'site.php'));
+        $this->product = new Product();
+
+        $params = $this->product->getAllProduct();
+        return $this->view->render('product_list.php', $params, 'site.php');
     }
 
     public function getProductById($id)
     {
-        $this->productController = new Product();
-        $params = $this->productController->getOneProduct($id);
+        $this->product = new Product();
+        $params = $this->product->getOneProduct($id);
         return$this->view->render('product_one.php', $params, 'site.php');
     }
-
 }

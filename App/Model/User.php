@@ -8,17 +8,41 @@ class User extends Model
 {
     protected $id;
 
-    protected string $name;
+    protected string $firstname;
+
+    protected string $lastname;
+
+    protected string $email;
 
     protected $password;
 
-    public function getName(): string
+    public function attributes(): array
     {
-        return $this->name;
+        return ['firstname', 'lastname', 'email', 'password'];
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstname;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastname;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function save()
+    {
+        parent::save();
     }
 
     protected static function getTableName(): string
     {
-        return "User";
+        return 'User';
     }
 }

@@ -4,15 +4,18 @@ namespace Framework\Core;
 
 class Model extends ActiveRecord
 {
-    protected $file;
 
-    public function __construct()
+    public function loadData($data)
     {
-        $this->file = json_decode(file_get_contents('App/Storage/products.txt'), true);
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
+        }
     }
 
-    protected static function getTableName(): string
+    public function attributes(): array
     {
-        // TODO: Implement getTableName() method.
+        return [];
     }
 }

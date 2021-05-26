@@ -6,41 +6,68 @@ use Framework\Core\Model;
 
 class Product extends Model
 {
-    protected $id;
+    public $id;
 
-    protected string $name;
+    public string $name;
 
-    protected string $category;
+    public int $price;
+
+    public int $count;
+
+    public int $category_id;
+
+    public function attributes(): array
+    {
+        return ['name', 'price', 'count', 'category_id'];
+    }
+
+    public function getId(): int
+    {
+        return parent::getId();
+    }
 
     public function getName(): string
     {
         return $this->name;
     }
 
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
     public function getCategory(): string
     {
-        return $this->category;
+        return $this->category_id;
     }
 
     public function getAllProduct(): array
     {
-        return $this->file;
+        return parent::findAll();
     }
 
     public function getOneProduct($id): array
     {
-        $products = $this->file;
+        return array(parent::findById($id));
+    }
 
-        if ($id !== $products[$id]['id']) {
-            echo($id);
-        } else {
-            $data = ($products[$id]);
-        }
-        return $data;
+    public function save()
+    {
+        parent::save();
+    }
+
+    public function deleteProduct($id)
+    {
+        parent::delete($id);
     }
 
     protected static function getTableName(): string
     {
-        return "Product";
+        return 'Product';
     }
 }
