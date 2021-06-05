@@ -23,4 +23,5 @@
 <!-- Footer -->
 <?php include "footer.php"; ?>
 </body>
+<script src="../../../public/js/product.js"></script>
 </html>
