@@ -13,13 +13,13 @@
             if ($session->cookieExists()) {
                 $session->start();
             }
-            if (!isset($_SESSION['login'])): ?>
+            if ($session->contains('name') == false): ?>
             <div class="text-end">
                 <a href="/login/" class="btn btn-outline-light me-2">Login</a>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+                <a href="/register/" class="btn btn-warning">Sign-up</a>
             </div>
             <?php else:
-                echo $_SESSION['login'];
+                echo($session->getName());
             ?>
             <div class="text-end ms-5">
                 <a href="/logout/" class="btn btn-outline-light me-2">LogOut</a>
