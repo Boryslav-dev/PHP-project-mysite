@@ -47,8 +47,11 @@ class LoginController extends Controller
     public function auth()
     {
         $auth = new Auth();
-        $auth->isAuth();
-        return header('Location:/');
+        if ($auth->login() == true) {
+            return header('Location:/');
+        } else {
+            $this->login();
+        }
     }
 
     public function logout()
