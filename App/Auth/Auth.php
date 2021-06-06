@@ -69,14 +69,14 @@ class Auth
         return true;
     }
 
-    public function setOldValue($value)
+    protected function setOldValue($value)
     {
         foreach ($value as $items => $item) {
             $this->session->set("$items", "$item");
         }
     }
 
-    public function validate($login, $email, $password): bool
+    protected function validate($login, $email, $password): bool
     {
         $pattern_login = '/\w{3,}/';
         $pattern_email = '/\w+@\w+\.\w+/';
@@ -95,6 +95,34 @@ class Auth
             return false;
         }
         return true;
+    }
+
+    public function login(): bool
+    {
+        if (isset($_POST['submit'])) {
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+                $email = $_POST['email'];
+                $pass = $_POST['password'];
+
+                $value['email'] = $email;
+
+                $this->setOldValue($value);
+
+                if ($this->user->checkUser($email) == true) {
+                    $currentUser = $this->user->getUser($email);
+                    if ($currentUser->password != $pass) {
+                        $this->session->set('message', 'Incorrect password');
+                        return false;
+                    }
+                    $this->session->setName($currentUser->login);
+                    $this->session->delete('message');
+                    return true;
+                } else {
+                    $this->session->set('message', 'This email not exists');
+                    return false;
+                }
+            }
+        }
     }
 
     public function checkPassword()
