@@ -48,11 +48,14 @@ abstract class ActiveRecord
 
     public function recordExists($tableName): bool
     {
-        $statement = Application::$app->db->query("SELECT COUNT(1) FROM $tableName WHERE 'id'= $this->id");
-        if ($statement == false) {
-            return false;
+        $statement = Application::$app->db->prepare("SELECT COUNT(1) FROM $tableName WHERE id = :id");
+        $statement->bindParam(':id', $this->id);
+        $statement->execute();
+        $res = $statement->fetchAll(PDO::FETCH_COLUMN);
+        if ($res[0] == 1) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function insert($tableName, $attributes, $params): bool
