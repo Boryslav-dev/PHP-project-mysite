@@ -34,6 +34,11 @@ class User extends Model
         return $this->email;
     }
 
+    public function getUser($email)
+    {
+        return parent::findOne(array('email' => $email));
+    }
+
     public function checkUser($email): bool
     {
         $tableName = self::getTableName();
