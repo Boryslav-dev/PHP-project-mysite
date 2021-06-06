@@ -2,38 +2,49 @@
 
 namespace App\Model;
 
+use Framework\Application;
 use Framework\Core\Model;
+use PDO;
 
 class User extends Model
 {
     protected $id;
 
-    protected string $firstname;
+    public string $login;
 
-    protected string $lastname;
+    public string $email;
 
-    protected string $email;
-
-    protected $password;
+    public string $password;
 
     public function attributes(): array
     {
-        return ['firstname', 'lastname', 'email', 'password'];
+        return ['login', 'email', 'password'];
     }
 
-    public function getFirstName(): string
+    /**
+     * @return string
+     */
+    public function getLogin(): string
     {
-        return $this->firstname;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastname;
+        return $this->login;
     }
 
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function checkUser($email): bool
+    {
+        $tableName = self::getTableName();
+        $statement = Application::$app->db->prepare("SELECT COUNT(1) FROM $tableName WHERE email = :email");
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $res = $statement->fetchAll(PDO::FETCH_COLUMN);
+        if ($res[0] == 1) {
+            return true;
+        }
+        return false;
     }
 
     public function save()
