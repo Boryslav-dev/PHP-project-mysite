@@ -7,7 +7,7 @@ class View
     public string $layout = 'site.php'; // default layout
     public string $template = 'product_list.php'; // default template
 
-    public function render(string $template, array $params = null, string $layout)
+    public function render(string $template, $params = null, string $layout)
     {
         if (is_array($params)) {
             // converting array elements to variables
