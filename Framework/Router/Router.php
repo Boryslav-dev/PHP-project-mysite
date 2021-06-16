@@ -35,7 +35,7 @@ class Router
                 $controller = new $callback[0]();
                 $callback[0] = $controller;
                 array_shift($params);
-                return call_user_func($callback, $params[0]);
+                return call_user_func_array($callback, $params);
             }
         }
     }
