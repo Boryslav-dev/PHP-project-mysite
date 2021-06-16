@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use Framework\Application;
 use Framework\Core\Model;
+use PDO;
 
 class Product extends Model
 {
@@ -51,9 +53,20 @@ class Product extends Model
         return parent::findAll();
     }
 
-    public function getOneProduct($id): array
+    public function getAllProductByPage($page, $typeSort): array
     {
-        return array(parent::findById($id));
+        $start = $page * 9;
+        $finish = ($page + 1) * 9;
+        $tableName = self::getTableName();
+        $statement = Application::$app->db->query("SELECT * FROM $tableName
+                                                    ORDER BY price $typeSort
+                                                    LIMIT $start,$finish");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getOneProduct($id)
+    {
+        return parent::findById($id);
     }
 
     public function save()
