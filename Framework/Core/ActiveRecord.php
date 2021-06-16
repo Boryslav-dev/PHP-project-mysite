@@ -48,7 +48,7 @@ abstract class ActiveRecord
 
     public function recordExists($tableName): bool
     {
-        $statement = Application::$app->db->prepare("SELECT COUNT(1) FROM $tableName WHERE id = :id");
+        $statement = self::prepare("SELECT COUNT(1) FROM $tableName WHERE id = :id");
         $statement->bindParam(':id', $this->id);
         $statement->execute();
         $res = $statement->fetchAll(PDO::FETCH_COLUMN);
