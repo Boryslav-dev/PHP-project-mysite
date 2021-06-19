@@ -16,7 +16,9 @@
 </head>
 <body>
 <!-- Header -->
+<div id="cart">
 <?php include "header.php"; ?>
+</div>
 <div id="content">
   <div class="box container">
       <div id="app">

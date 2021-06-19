@@ -12,9 +12,9 @@ class Product extends Model
 
     public string $name;
 
-    public int $price;
+    public string $price;
 
-    public int $count;
+    public string $count;
 
     public int $category_id;
 
@@ -33,12 +33,12 @@ class Product extends Model
         return $this->name;
     }
 
-    public function getPrice(): int
+    public function getPrice(): string
     {
         return $this->price;
     }
 
-    public function getCount(): int
+    public function getCount(): string
     {
         return $this->count;
     }
@@ -53,12 +53,18 @@ class Product extends Model
         return parent::findAll();
     }
 
-    public function getAllProductByPage($page, $typeSort): array
+    public function getAllProductByPage($page, $typeSort, $category): array
     {
         $start = $page * 9;
         $finish = ($page + 1) * 9;
         $tableName = self::getTableName();
+        if ($category != 0) {
+            $where = "WHERE category_id = $category";
+        } else {
+            $where = "";
+        }
         $statement = Application::$app->db->query("SELECT * FROM $tableName
+                                                    $where
                                                     ORDER BY price $typeSort
                                                     LIMIT $start,$finish");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
