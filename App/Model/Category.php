@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Model;
 
 use Framework\Core\Model;
 
@@ -20,14 +20,14 @@ class Category extends Model
         return $this->name;
     }
 
-    public function getAllCategory()
+    public function getAllCategory(): array
     {
-        parent::findAll();
+        return parent::findAll();
     }
 
     public function getOneCategory($id)
     {
-        parent::findOne($id);
+        return parent::findOne($id);
     }
 
     public function save()
