@@ -3,7 +3,6 @@
 namespace Framework\Database;
 
 use PDO;
-use PDOStatement;
 
 class Database
 {
