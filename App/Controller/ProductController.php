@@ -32,6 +32,11 @@ class ProductController extends Controller
         return $this->view->render('product_one.php', null, 'site.php');
     }
 
+    public function cart()
+    {
+        return $this->view->render('cart.php', null, 'site.php');
+    }
+
     public function getProductList()
     {
         $params = $this->product->getAllProduct();
@@ -46,9 +51,9 @@ class ProductController extends Controller
 
     /* API */
 
-    public function getProductListAPI($page, $typeSort)
+    public function getProductListAPI($page, $typeSort, $category)
     {
-        $params = $this->product->getAllProductByPage($page, $typeSort);
+        $params = $this->product->getAllProductByPage($page, $typeSort, $category);
         return json_encode($params);
     }
 
