@@ -20,7 +20,7 @@
                             <a href="/login/" class="btn btn-outline-dark ms-5">Login</a>
                         </div>
                     <?php else:?>
-                        <cart_card   :key="<?php echo($params->getId());?>"
+                        <cart_card :key="<?php echo($params->getId());?>"
                                 :id="<?php echo($params->getId());?>"
                                 :name="'<?php echo($params->getName());?>'"
                                 :price="<?php echo($params->getPrice());?>"
