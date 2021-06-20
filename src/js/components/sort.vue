@@ -1,8 +1,8 @@
 <template>
   <article>
     <div class="btn-group mt-5 ms-5" role="group" aria-label="Button group with nested dropdown">
-      <button type="button" class="btn btn-outline-secondary" @click="sort('DESC')">Сортировать по убыванию</button>
-      <button type="button" class="btn btn-outline-secondary" @click="sort('ASC')">Сортировать по возрастанию</button>
+      <button type="button" name="desc" class="btn btn-outline-secondary" @click="sort('DESC')">Сортировать по убыванию</button>
+      <button type="button" name="asc" class="btn btn-outline-secondary" @click="sort('ASC')">Сортировать по возрастанию</button>
     </div>
   </article>
 </template>
