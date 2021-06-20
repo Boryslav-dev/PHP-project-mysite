@@ -12,6 +12,8 @@ class Auth
 
     protected User $user;
 
+    public string $message;
+
     public function __construct()
     {
         $this->session = new Session();
@@ -76,22 +78,25 @@ class Auth
         }
     }
 
-    protected function validate($login, $email, $password): bool
+    public function validate($login, $email, $password): bool
     {
         $pattern_login = '/\w{3,}/';
         $pattern_email = '/\w+@\w+\.\w+/';
         $pattern_password = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/';
 
         if (preg_match($pattern_login, $login) == false) {
-            $this->session->set('message', 'Login is so short');
+            $this->message = 'Login is so short';
+            $this->session->set('message', $this->message);
             return false;
         }
         if (preg_match($pattern_email, $email) == false) {
-            $this->session->set('message', 'Email don`t have "@"');
+            $this->message = 'Email don`t have "@"';
+            $this->session->set('message', $this->message);
             return false;
         }
         if (preg_match($pattern_password, $password) == false) {
-            $this->session->set('message', 'Password must have: Uppercase and lowercase later, number, and minimum 8 symbols');
+            $this->message = 'Password must have: Uppercase and lowercase later, number, and minimum 8 symbols';
+            $this->session->set('message', $this->message);
             return false;
         }
         return true;
@@ -125,9 +130,6 @@ class Auth
         }
     }
 
-    public function checkPassword()
-    {
-    }
 
     public function isAuth($login, $pass): bool
     {
