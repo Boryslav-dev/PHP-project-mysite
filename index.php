@@ -7,9 +7,15 @@
 use App\Controller\LoginController;
 use App\Controller\ProductController;
 use App\Controller\CategoryController;
+use Dotenv\Dotenv;
 use Framework\Application;
 
 include_once 'vendor/autoload.php';
+
+$envName = getenv('APP_ENV') === 'testing' ? '.env.testing' : '.env';
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $app = new Application();
 
