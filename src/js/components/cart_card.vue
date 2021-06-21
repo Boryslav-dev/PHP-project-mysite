@@ -12,15 +12,19 @@ export default {
   name: "cart_card",
   props: {
     id: {
-      type: String,
+      type: Number,
       require: true,
     },
     name: {
       type: String,
       require: true,
     },
-    price: {
+    img: {
       type: String,
+      require: true,
+    },
+    price: {
+      type: Number,
       require: true,
     }
   },

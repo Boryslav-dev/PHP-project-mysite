@@ -9,6 +9,7 @@
         <product v-for="product in products" :key="product.id"
           :id="product.id"
           :name="product.name"
+          :img="product.img"
           :price="product.price"
           :count="product.count"
         >
@@ -64,7 +65,7 @@ export default {
       this.products = this.getProducts(this.pageNumber, this.typeSort, this.category).then((products) => {
         this.products = products;
       });
-    }
+    },
   },
   created() {
     this.$root.$on('setPage', this.setPage);
