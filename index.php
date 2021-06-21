@@ -34,5 +34,6 @@ $app->router->get('/product/', [ProductController::class, 'product']);
 $app->router->get('/getProductListAPI/(\d+)/(\w+)/(\d+)/', [ProductController::class, 'getProductListAPI']);
 $app->router->get('/getCategoryAPI/', [CategoryController::class, 'getCategoryAPI']);
 $app->router->get('/cart/', [ProductController::class, 'cart']);
+$app->router->get('/getCountPages/', [ProductController::class, 'getCountPages']);
 
 $app->run();

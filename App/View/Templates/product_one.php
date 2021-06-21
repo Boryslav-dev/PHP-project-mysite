@@ -23,6 +23,7 @@
                         <cart_card :key="<?php echo($params->getId());?>"
                                 :id="<?php echo($params->getId());?>"
                                 :name="'<?php echo($params->getName());?>'"
+                                :img="'<?php echo($params->getImg());?>'"
                                 :price="<?php echo($params->getPrice());?>"
                         ></cart_card>
                     <?php endif; ?>
