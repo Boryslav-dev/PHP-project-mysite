@@ -8,7 +8,7 @@ use PDO;
 
 class User extends Model
 {
-    protected $id;
+    protected int $id;
 
     public string $login;
 
@@ -34,12 +34,12 @@ class User extends Model
         return $this->email;
     }
 
-    public function getUser($email)
+    public function getUser(string $email)
     {
         return parent::findOne(array('email' => $email));
     }
 
-    public function checkUser($email): bool
+    public function checkUser(string $email): bool
     {
         $tableName = self::getTableName();
         $statement = Application::$app->db->prepare("SELECT COUNT(1) FROM $tableName WHERE email = :email");

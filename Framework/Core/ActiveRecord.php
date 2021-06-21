@@ -8,7 +8,7 @@ use PDO;
 abstract class ActiveRecord
 {
     /** @var int */
-    protected $id;
+    protected int $id;
 
     /**
      * @return int
@@ -46,7 +46,7 @@ abstract class ActiveRecord
         }
     }
 
-    public function recordExists($tableName): bool
+    public function recordExists(string $tableName): bool
     {
         $statement = self::prepare("SELECT COUNT(1) FROM $tableName WHERE id = :id");
         $statement->bindParam(':id', $this->id);
@@ -58,7 +58,7 @@ abstract class ActiveRecord
         return false;
     }
 
-    public function insert($tableName, $attributes, $params): bool
+    public function insert(string $tableName, array $attributes, array $params): bool
     {
         $statement = self::prepare("INSERT INTO $tableName (" . implode(",", $attributes) . ")
                 VALUES (" . implode(",", $params) . ")");
@@ -70,7 +70,7 @@ abstract class ActiveRecord
         return true;
     }
 
-    public function update($tableName, $attributes, $params): bool
+    public function update(string $tableName, array $attributes, array $params): bool
     {
         $sql = "UPDATE $tableName SET ";
         for ($i = 0; $i < count($attributes); $i++) {
@@ -90,7 +90,7 @@ abstract class ActiveRecord
         return true;
     }
 
-    public static function findOne($where)
+    public static function findOne(array $where)
     {
         $tableName = static::getTableName();
         $attributes = array_keys($where);
@@ -104,7 +104,7 @@ abstract class ActiveRecord
         return $statement->fetchObject(static::class);
     }
 
-    public static function findById($id)
+    public static function findById(int $id)
     {
         $tableName = static::getTableName();
         $statement = Application::$app->db->query("SELECT * FROM $tableName WHERE id = $id");

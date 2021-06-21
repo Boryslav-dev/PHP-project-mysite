@@ -49,7 +49,7 @@ class Auth
 
                 if ($this->validate($login, $email, $pass) == false) {
                     return false;
-                };
+                }
 
                 $this->user->login = $login;
                 $this->user->email = $email;
@@ -78,7 +78,7 @@ class Auth
         }
     }
 
-    public function validate($login, $email, $password): bool
+    public function validate(string $login, string $email, string $password): bool
     {
         $pattern_login = '/\w{3,}/';
         $pattern_email = '/\w+@\w+\.\w+/';
