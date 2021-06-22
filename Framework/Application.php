@@ -9,8 +9,11 @@ use Framework\Router\Router;
 class Application
 {
     public static Application $app;
+
     public Router $router;
+
     public Request $request;
+
     public Database $db;
 
 
