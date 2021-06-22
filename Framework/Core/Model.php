@@ -5,7 +5,7 @@ namespace Framework\Core;
 class Model extends ActiveRecord
 {
 
-    public function loadData($data)
+    public function loadData(array $data)
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {

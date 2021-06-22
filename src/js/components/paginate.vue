@@ -8,10 +8,13 @@
         <li v-else class="page-item">
           <a class="page-link" @click="prevPage">Previous</a>
         </li>
-          <li class="page-item" v-for="page in 5" :key="page">
+          <li class="page-item" v-for="page in count" :key="page">
             <a class="page-link" @click="pageClick(page)">{{page}}</a>
           </li>
-        <li class="page-item">
+        <li v-if="this.pageNumber === count-1" class="page-item disabled">
+          <a class="page-link" @click="nextPage">Next</a>
+        </li>
+        <li v-else class="page-item">
           <a class="page-link" @click="nextPage">Next</a>
         </li>
       </ul>
@@ -26,12 +29,29 @@ import product_list from "./product_list.vue";
 export default {
   name: "paginate",
   components: {product_list},
+  props: {
+    pages: {
+      type: Number,
+      require: true,
+    }
+  },
   data(){
     return{
       pageNumber: 0,
+      count: 0,
     }
   },
   methods: {
+    getCountPages: async () => {
+      let response = await fetch(`/getCountPages/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      const count = response.json();
+      return count;
+    },
     pageClick: function (page){
       this.pageNumber = page - 1;
       this.$root.$emit('setPage', this.pageNumber);
@@ -44,6 +64,11 @@ export default {
       this.pageNumber--;
       this.$root.$emit('setPage', this.pageNumber);
     }
+  },
+  created() {
+    this.count = this.getCountPages().then((count) => {
+      this.count = count;
+    });
   },
 }
 

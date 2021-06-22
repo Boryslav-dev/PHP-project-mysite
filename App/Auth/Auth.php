@@ -2,6 +2,7 @@
 
 namespace App\Auth;
 
+use App\Model\RoleToUser;
 use App\Model\User;
 use Framework\Request\Request;
 use Framework\Session\Session;
@@ -49,14 +50,16 @@ class Auth
 
                 if ($this->validate($login, $email, $pass) == false) {
                     return false;
-                };
+                }
 
                 $this->user->login = $login;
                 $this->user->email = $email;
                 $this->user->password = $pass;
+                $this->user->created_at = date("Y-m-d H:i:s");
 
                 if ($this->user->checkUser($email) == false) {
                     $this->user->save();
+                    $this->setRole($email);
                     $this->session->setName($login);
                     $this->session->delete('message');
                 } else {
@@ -78,7 +81,7 @@ class Auth
         }
     }
 
-    public function validate($login, $email, $password): bool
+    public function validate(string $login, string $email, string $password): bool
     {
         $pattern_login = '/\w{3,}/';
         $pattern_email = '/\w+@\w+\.\w+/';
@@ -120,6 +123,7 @@ class Auth
                         return false;
                     }
                     $this->session->setName($currentUser->login);
+                    $this->session->set('id', $currentUser->getId());
                     $this->session->delete('message');
                     return true;
                 } else {
@@ -130,6 +134,18 @@ class Auth
         }
     }
 
+    protected function setRole(string $email)
+    {
+        $roleToUser = new RoleToUser();
+
+        $currentUser = $this->user->getUser($email);
+
+        $roleToUser->user_id = $currentUser->getId();
+        $roleToUser->role_id = 2;
+
+        print_r($roleToUser);
+        $roleToUser->save();
+    }
 
     public function isAuth($login, $pass): bool
     {

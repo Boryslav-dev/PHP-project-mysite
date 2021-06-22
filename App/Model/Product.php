@@ -14,13 +14,19 @@ class Product extends Model
 
     public string $price;
 
+    public ?string $img;
+
     public string $count;
 
-    public int $category_id;
+    public ?int $category_id;
+
+    public ?string $created_at;
+
+    public ?string $updated_at;
 
     public function attributes(): array
     {
-        return ['name', 'price', 'count', 'category_id'];
+        return ['name', 'price', 'img', 'count', 'category_id', 'created_at', 'updated_at'];
     }
 
     public function getId(): int
@@ -32,6 +38,12 @@ class Product extends Model
     {
         return $this->name;
     }
+
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
 
     public function getPrice(): string
     {
@@ -48,12 +60,17 @@ class Product extends Model
         return $this->category_id;
     }
 
+    public function getCreatedTime(): ?string
+    {
+        return $this->created_at;
+    }
+
     public function getAllProduct(): array
     {
         return parent::findAll();
     }
 
-    public function getAllProductByPage($page, $typeSort, $category): array
+    public function getAllProductByPage(int $page, string $typeSort, int $category): array
     {
         $start = $page * 9;
         $finish = ($page + 1) * 9;
@@ -70,7 +87,16 @@ class Product extends Model
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getOneProduct($id)
+    public function getPages(): int
+    {
+        $tableName = self::getTableName();
+        $statement = Application::$app->db->query("SELECT count(id) FROM $tableName");
+        $res = $statement->fetchAll(PDO::FETCH_COLUMN);
+        return ($res[0] / 9) + 1;
+    }
+
+
+    public function getOneProduct(int $id)
     {
         return parent::findById($id);
     }
@@ -80,7 +106,7 @@ class Product extends Model
         parent::save();
     }
 
-    public function deleteProduct($id)
+    public function deleteProduct(int $id)
     {
         parent::delete($id);
     }

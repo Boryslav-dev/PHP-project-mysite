@@ -16,11 +16,19 @@ class User extends Model
 
     public string $password;
 
+    public $created_at;
+
+    public $updated_at;
+
     public function attributes(): array
     {
-        return ['login', 'email', 'password'];
+        return ['login', 'email', 'password', 'created_at'];
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
     /**
      * @return string
      */
@@ -34,12 +42,12 @@ class User extends Model
         return $this->email;
     }
 
-    public function getUser($email)
+    public function getUser(string $email)
     {
         return parent::findOne(array('email' => $email));
     }
 
-    public function checkUser($email): bool
+    public function checkUser(string $email): bool
     {
         $tableName = self::getTableName();
         $statement = Application::$app->db->prepare("SELECT COUNT(1) FROM $tableName WHERE email = :email");
@@ -61,4 +69,5 @@ class User extends Model
     {
         return 'User';
     }
+
 }
