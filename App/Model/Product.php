@@ -8,21 +8,25 @@ use PDO;
 
 class Product extends Model
 {
-    public int $id;
+    public $id;
 
     public string $name;
 
     public string $price;
 
-    public string $img;
+    public ?string $img;
 
     public string $count;
 
-    public int $category_id;
+    public ?int $category_id;
+
+    public ?string $created_at;
+
+    public ?string $updated_at;
 
     public function attributes(): array
     {
-        return ['name', 'price', 'img', 'count', 'category_id'];
+        return ['name', 'price', 'img', 'count', 'category_id', 'created_at', 'updated_at'];
     }
 
     public function getId(): int
@@ -54,6 +58,11 @@ class Product extends Model
     public function getCategory(): string
     {
         return $this->category_id;
+    }
+
+    public function getCreatedTime(): ?string
+    {
+        return $this->created_at;
     }
 
     public function getAllProduct(): array

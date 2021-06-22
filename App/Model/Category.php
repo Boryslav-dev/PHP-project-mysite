@@ -6,13 +6,15 @@ use Framework\Core\Model;
 
 class Category extends Model
 {
-    protected int $id;
+    protected $id;
 
-    protected string $name;
+    public string $name;
+
+    public ?string $created_at;
 
     public function attributes(): array
     {
-        return ['name'];
+        return ['name', 'created_at'];
     }
 
     public function getId(): int
@@ -30,7 +32,7 @@ class Category extends Model
         return parent::findAll();
     }
 
-    public function getOneCategory(int $id)
+    public function getOneCategory($id)
     {
         return parent::findOne($id);
     }

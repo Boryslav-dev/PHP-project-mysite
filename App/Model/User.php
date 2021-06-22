@@ -8,7 +8,7 @@ use PDO;
 
 class User extends Model
 {
-    protected int $id;
+    protected $id;
 
     public string $login;
 
@@ -16,11 +16,19 @@ class User extends Model
 
     public string $password;
 
+    public $created_at;
+
+    public $updated_at;
+
     public function attributes(): array
     {
-        return ['login', 'email', 'password'];
+        return ['login', 'email', 'password', 'created_at'];
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
     /**
      * @return string
      */
@@ -61,4 +69,5 @@ class User extends Model
     {
         return 'User';
     }
+
 }
