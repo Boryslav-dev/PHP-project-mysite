@@ -4,22 +4,15 @@ namespace App\Controller;
 
 use App\Model\Product;
 use Framework\Core\Controller;
-use Framework\Core\Model;
-use Framework\Core\View;
 
 class ProductController extends Controller
 {
     protected Product $product;
 
-    protected View $view;
-
-    protected Model $model;
-
     public function __construct()
     {
+        parent::__construct();
         $this->product = new Product();
-        $this->view = new View();
-        $this->model = new Model();
     }
 
     public function index()
