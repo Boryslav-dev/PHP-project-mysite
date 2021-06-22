@@ -11,6 +11,7 @@
             <?php $session = new Framework\Session\Session();
             if ($session->cookieExists()) {
                 $session->start();
+                $session->delete('message');
             }
             if ($session->contains('name') == false): ?>
             <div class="text-end">
