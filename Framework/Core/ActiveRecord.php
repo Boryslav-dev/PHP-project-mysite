@@ -8,7 +8,7 @@ use PDO;
 abstract class ActiveRecord
 {
     /** @var int */
-    protected int $id;
+    protected $id;
 
     /**
      * @return int
@@ -58,7 +58,7 @@ abstract class ActiveRecord
         return false;
     }
 
-    public function insert(string $tableName, array $attributes, array $params): bool
+    protected function insert(string $tableName, array $attributes, array $params): bool
     {
         $statement = self::prepare("INSERT INTO $tableName (" . implode(",", $attributes) . ")
                 VALUES (" . implode(",", $params) . ")");
@@ -70,7 +70,7 @@ abstract class ActiveRecord
         return true;
     }
 
-    public function update(string $tableName, array $attributes, array $params): bool
+    protected function update(string $tableName, array $attributes, array $params): bool
     {
         $sql = "UPDATE $tableName SET ";
         for ($i = 0; $i < count($attributes); $i++) {
@@ -111,11 +111,18 @@ abstract class ActiveRecord
         return $statement->fetchObject(static::class);
     }
 
-    public static function findAll()
+    public static function findAll(): array
     {
         $tableName = static::getTableName();
         $statement = Application::$app->db->query("SELECT * FROM $tableName");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function findAllObject()
+    {
+        $tableName = static::getTableName();
+        $statement = Application::$app->db->query("SELECT * FROM $tableName");
+        return $statement->fetchObject(static::class);
     }
 
     public static function delete($where)
