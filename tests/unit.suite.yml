@@ -7,4 +7,9 @@ modules:
     enabled:
         - Asserts
         - \Helper\Unit
-    step_decorators: ~        
+        - Db:
+              dsn: "%DB_CONNECTION%:host=%DB_HOST%;dbname=%DB_DATABASE%"
+              user: "%DB_USERNAME%"
+              password: "%DB_PASSWORD%"
+              populate: true
+    step_decorators: ~

@@ -5,7 +5,7 @@ use Framework\Session\Session;
 
 class userValidationCest
 {
-    private $auth;
+    private Auth $auth;
 
     public function _before(UnitTester $I)
     {
