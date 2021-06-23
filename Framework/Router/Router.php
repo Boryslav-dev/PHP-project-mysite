@@ -2,6 +2,7 @@
 
 namespace Framework\Router;
 
+use Exception;
 use Framework\Request\Request;
 
 class Router
@@ -30,13 +31,19 @@ class Router
     {
         $method = $this->request->getMethod();
         $url = $this->request->getUrl();
-        foreach ($this->routeMap as $pattern => $callback) {
-            if (preg_match($pattern, $url, $params)) {
-                $controller = new $callback[0]();
-                $callback[0] = $controller;
-                array_shift($params);
-                return call_user_func_array($callback, $params);
+        try {
+            foreach ($this->routeMap as $pattern => $callback) {
+                if (preg_match($pattern, $url, $params)) {
+                    $controller = new $callback[0]();
+                    $callback[0] = $controller;
+                    array_shift($params);
+                    return call_user_func_array($callback, $params);
+                }
             }
+            throw new Exception('Page not found');
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
+            return null;
         }
     }
 }
